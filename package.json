@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "node_modules/.bin/nodemon index.js",
+    "lint": "node_modules/.bin/eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Eero Kalaja",
@@ -17,6 +18,7 @@
     "mongoose": "^5.0.1"
   },
   "devDependencies": {
+    "eslint": "^4.16.0",
     "nodemon": "^1.14.11"
   }
 }
