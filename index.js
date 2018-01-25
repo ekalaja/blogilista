@@ -10,6 +10,5 @@ const blogsRouter = require('./controllers/blogs')
 app.use('/api/blogs', blogsRouter)
 
 const PORT = 3003
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+app.listen(PORT, () => {console.log(`Server running on port ${PORT}`)
 })

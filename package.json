@@ -7,7 +7,7 @@
     "start": "node index.js",
     "watch": "node_modules/.bin/nodemon index.js",
     "lint": "node_modules/.bin/eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/jest --verbose"
   },
   "author": "Eero Kalaja",
   "license": "ISC",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "eslint": "^4.16.0",
+    "jest": "^22.1.4",
     "nodemon": "^1.14.11"
   }
 }
