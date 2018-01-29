@@ -1,7 +1,6 @@
-const mongooseSettings = require('../mongo')
+const mongoose = require('mongoose')
 
-
-const Blog = mongooseSettings.model('Blog', {
+const Blog = mongoose.model('Blog', {
   title: String,
   author: String,
   url: String,

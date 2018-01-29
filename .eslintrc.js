@@ -3,7 +3,8 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+  "parser": "babel-eslint",
+  "extends": "eslint:recommended",
     "rules": {
         "indent": [
             "error",
