@@ -14,15 +14,18 @@ blogsRouter.post('/', async (request, response) => {
     return response.status(400).json({ error: 'missing fields' })
   }
   try {
-    const blog = new Blog({
-      title: body.title,
-      author: body.author,
-      url: body.url,
-      likes: body.likes === undefined ? 0: body.likes
-    }) /*
-    const blog = new Blog(request.body)*/
-    await blog.save()
-    response.json(blog)
+    if (body.likes === undefined) {
+      const blog = new Blog(body)
+      blog.likes = 0
+      await blog.save()
+      response.json(blog)
+    } else {
+      const blog = new Blog(body)
+      console.log('BLLOOOGG: ', blog)
+      console.log('request body: ', body)
+      await blog.save()
+      response.json(blog)
+    }
   }  catch (exception) {
     console.log(exception)
     response.status(500).json({ error: 'something went wrong...' })
