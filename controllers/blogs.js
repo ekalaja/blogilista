@@ -21,8 +21,6 @@ blogsRouter.post('/', async (request, response) => {
       response.json(blog)
     } else {
       const blog = new Blog(body)
-      console.log('BLLOOOGG: ', blog)
-      console.log('request body: ', body)
       await blog.save()
       response.json(blog)
     }
@@ -31,5 +29,27 @@ blogsRouter.post('/', async (request, response) => {
     response.status(500).json({ error: 'something went wrong...' })
   }
 })
+
+blogsRouter.delete('/:id', async (request, response) => {
+  try {
+    await Blog.findByIdAndRemove(request.params.id)
+    response.status(204).end()
+  } catch (exception) {
+    console.log(exception)
+    response.status(400).send({ error: 'id not found' })
+  }
+})
+
+blogsRouter.put('/:id', async (request, response) => {
+  try {
+    const body = await request.body
+    await Blog.findByIdAndUpdate(request.params.id, body, { new: true })
+    response.json(body)
+  } catch (exception) {
+    console.log(exception)
+    response.status(400).send({ error: 'id not found' })
+  }
+})
+
 
 module.exports = blogsRouter
