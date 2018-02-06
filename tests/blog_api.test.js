@@ -1,4 +1,4 @@
-describe.skip('blog_api tests', () => {
+describe('blog_api tests', () => {
 
   const supertest = require('supertest')
   const { app, server } = require('../index')

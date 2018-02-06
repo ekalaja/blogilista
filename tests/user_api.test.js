@@ -83,8 +83,17 @@ describe.only('when there is initially one user at db', async () => {
     var firstUser = response.body[0]
     expect(firstUser.username).toBe('root')
   })
-})
+  /*test('user can login with valid username and password', async () => {
+    const user = { username: 'root', password: 'sekret' }
 
+    const result = await api
+      .post('/api/login')
+      .send(user)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+    expect(result.body).toBe('root')
+  })*/
+})
 
 
 afterAll(() => {
