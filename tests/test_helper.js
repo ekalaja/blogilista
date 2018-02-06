@@ -55,15 +55,6 @@ const noTitleAndUrlBlog = new Blog ({
   likes: 2
 })
 
-const format = (blog) => {
-  return {
-    id: blog._id,
-    author: blog.author,
-    likes: blog.likes === undefined ? 0: blog.likes,
-    title: blog.title,
-    url: blog.url
-  }
-}
 
 const nonExistingId = async () => {
   const note = new Blog()
@@ -84,5 +75,5 @@ const usersInDb = async () => {
 }
 
 module.exports = {
-  initialBlogs, format, nonExistingId, blogsInDb, usersInDb, additionalBlog, noLikesFieldBlog, noTitleAndUrlBlog
+  initialBlogs, nonExistingId, blogsInDb, usersInDb, additionalBlog, noLikesFieldBlog, noTitleAndUrlBlog
 }

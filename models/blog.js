@@ -11,10 +11,10 @@ const blogSchema = new mongoose.Schema({
 blogSchema.statics.format = (blog) => {
   return {
     user: blog.user,
+    likes: blog.likes,
     title: blog.title,
     author: blog.author,
-    url: blog.url,
-    likes: blog.likes
+    url: blog.url
   }
 }
 

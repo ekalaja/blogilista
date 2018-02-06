@@ -48,19 +48,7 @@ const mostBlogs = (blogs) => {
 
 const favoriteBlog = (blogs) => {
   const favorite = blogs.reduce(function (previousValue, currentValue) {return previousValue.likes < currentValue.likes ? currentValue : previousValue }, blogs[0])
-  return formatBlog(favorite)
-}
-
-
-const formatBlog = (blog) => {
-  if (blog===undefined) {
-    return 'no blogs'
-  }
-  return {
-    title: blog.title,
-    author: blog.author,
-    likes: blog.likes
-  }
+  return favorite
 }
 
 module.exports = {
