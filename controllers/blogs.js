@@ -1,17 +1,20 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
+const Comment = require('../models/comment')
 const jwt = require('jsonwebtoken')
 
 
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({})
     .populate('user', { id: 1, username: 1, name: 1 })
+    .populate('comments', { id:1, title: 1 })
   response.json(blogs.map(Blog.format))
 })
 
 blogsRouter.post('/', async (request, response) => {
   const body = request.body
+
   try {
     const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
@@ -45,6 +48,28 @@ blogsRouter.post('/', async (request, response) => {
       console.log(exception)
       response.status(500).json({ error: 'something went wrong...' })
     }
+  }
+})
+
+blogsRouter.post('/:id/comments', async (request, response) => {
+  const body = request.body
+  try {
+    if (body === undefined || request.params.id === undefined) {
+      return response.status(400).json({ error: 'missing comment or id' })
+    }
+    const blog = await Blog.findById(request.params.id)
+    const comment = new Comment(body)
+    comment.blog = blog._id
+    const savedComment = await comment.save()
+    blog.comments = blog.comments.concat(savedComment._id)
+    const vastaus = await blog.save()
+    const blogFromDB = await Blog.findById(blog._id)
+      .populate('user', { id: 1, username: 1, name: 1 })
+      .populate('comments', { id:1, title: 1 })
+    response.json(Blog.format(blogFromDB))
+  } catch(exception) {
+    console.log(exception)
+    response.status(500).json({ error: 'something went wrong...' })
   }
 })
 
